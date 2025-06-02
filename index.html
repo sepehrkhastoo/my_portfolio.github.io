@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Backend Developer</title>
+  <title>My-Web</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
@@ -45,7 +45,6 @@
     .nav-links {
       display: flex; gap: 1rem;
       list-style: none;
-      flex-wrap: wrap;
     }
     .nav-links a {
       color: var(--light);
@@ -56,6 +55,12 @@
     }
     .nav-links a:hover {
       background: var(--primary); color: var(--dark);
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--light);
     }
     .hero {
       min-height: 100vh;
@@ -71,16 +76,16 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
-    .skills, .projects, .certificates, .contact {
+    .skills, .projects, .contact {
       padding: 3rem 10%;
     }
-    .skills-grid, .project-grid, .cert-grid {
+    .skills-grid, .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
-    .skill-item, .project-card, .cert-item {
+    .skill-item, .project-card {
       background: var(--glass);
       padding: 1.5rem;
       border-radius: 15px;
@@ -103,16 +108,6 @@
     .project-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-    .cert-item img {
-      max-width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--primary);
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .cert-item img:hover {
-      transform: scale(1.03);
     }
     .contact-form {
       background: var(--glass);
@@ -147,26 +142,47 @@
     .social-links a:hover {
       color: var(--accent);
     }
+    #backToTop {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+    }
 
     @media screen and (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .skills, .projects, .certificates, .contact {
-        padding: 2rem 5%;
-      }
       .nav-links {
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
+        background: var(--glass);
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        border-radius: 8px;
+        padding: 1rem;
+        z-index: 999;
       }
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .skills, .projects, .contact {
+        padding: 2rem 5%;
       }
     }
 
     @media screen and (max-width: 480px) {
-      .cert-grid, .skills-grid, .project-grid {
+      .skills-grid, .project-grid {
         grid-template-columns: 1fr;
       }
       .hero {
@@ -177,19 +193,19 @@
 </head>
 <body>
   <nav class="navbar">
+    <span class="menu-toggle"><i class="fas fa-bars"></i></span>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#certs">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
   <section class="hero" id="home">
     <div class="hero-content">
-      <h1>Sepehr Khastoo</h1>
-      <p>Interested in Machine learning and Artificial Neural Networks</p>
+      <h1>Sepehr Khastoo | Backend Developer & Machine Learning Enthusiast</h1>
+  
     </div>
   </section>
 
@@ -212,21 +228,10 @@
         <h3>Store Management System</h3>
         <p>Tech Stack: Python, Tkinter, MySQL, ORM</p>
       </div>
-    </div>
-    <div class="project-grid">
       <div class="project-card">
         <h3>Store Management System</h3>
         <p>Tech Stack: Flask, FastAPI, ORM</p>
       </div>
-    </div>
-  </section>
-
-  <section class="certificates" id="certs">
-    <h2>Certificates</h2>
-    <div class="cert-grid">
-      <div class="cert-item"><a href="image/cert1.jpeg" target="_blank"><img src="image/cert1.jpeg" alt="Certificate 1"></a></div>
-      <div class="cert-item"><a href="image/cert2.jpeg" target="_blank"><img src="image/cert2.jpeg" alt="Certificate 2"></a></div>
-      <div class="cert-item"><a href="image/cert3.jpeg" target="_blank"><img src="image/cert3.jpeg" alt="Certificate 3"></a></div>
     </div>
   </section>
 
@@ -244,12 +249,14 @@
     </div>
   </footer>
 
+  <button id="backToTop" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
   <script>
     const themeBtn = document.createElement('button');
     themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
     themeBtn.style.position = 'fixed';
     themeBtn.style.bottom = '20px';
-    themeBtn.style.right = '20px';
+    themeBtn.style.right = '80px';
     themeBtn.style.padding = '12px';
     themeBtn.style.background = 'var(--primary)';
     themeBtn.style.color = 'white';
@@ -292,7 +299,24 @@
     });
 
     document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
 
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  </script>
 </body>
 </html>
